@@ -164,5 +164,6 @@ window.addEventListener("load", () => {
         timer.stop();
         vGoal = true;
         updatePoint();
+        bigMsg.innerText = "試合終了";
     })
 });
