@@ -55,6 +55,15 @@ function ms2string(ms) {
     return Math.abs(ms / 1000).toFixed(1).padStart(5, "0");
 }
 
+function updatePoint() {
+    const pointEles = document.querySelectorAll(".point");
+    let point = 0;
+    pointEles.forEach(pointEle => {
+        point += parseInt(pointEle.innerText, 10)
+    })
+    document.getElementById("point").innerText = point;
+}
+
 window.addEventListener("load", () => {
     const MATCH_TIME = 3 * 60 * 1000;
     const bigMsg = document.getElementById("h1-msg");
@@ -98,4 +107,40 @@ window.addEventListener("load", () => {
         timeArea.innerText = ms2string(timer.getRemainingTime());
         bigMsg.innerText = "試合開始前";
     };
+
+    achivementIds = [
+        "achv-bombA",
+        "achv-center",
+        "achv-soft",
+        "achv-east",
+        "achv-bombB",
+        "achv-soko",
+    ]
+
+    achivementIds.forEach(id => {
+        const a = document.getElementById(id);
+
+        a.addEventListener("click", function () {
+            const point = this.querySelector(".point");
+            let p = parseInt(point.innerText, 10) + 10;
+            console.log("p = " + p);
+            this.classList.add("fill");
+            point.innerText = String(p);
+            updatePoint();
+        });
+
+        a.addEventListener("contextmenu", function (e) {
+            const point = this.querySelector(".point");
+            let p = parseInt(point.innerText, 10) - 10;
+            console.log("p = " + p);
+            if (p <= 0) {
+                this.classList.remove("fill");
+                point.innerText = '00';
+            } else {
+                point.innerText = String(p);
+            }
+            updatePoint();
+            e.preventDefault();
+        }, false);
+    });
 });

@@ -46,7 +46,9 @@ timer buttons
     outline: none;
     border-radius: 50px;
     padding: 20px 0;
-    width: 160px;
+    font-size: 1.4rem;
+    margin: 5px;
+    width: 140px;
 }
 
 .timer-btns button:enabled {
@@ -55,4 +57,23 @@ timer buttons
 
 .timer-btns button:disabled {
     background: lightgreen;
+}
+
+/*
+achivements
+*/
+.achv-unlock-btn {
+    text-align: center;
+    font-size: xx-large;
+    border: 4px solid aqua;
+    border-radius: 15px;
+    margin: 10px;
+}
+
+.achv-unlock-btn p {
+    white-space: nowrap;
+}
+
+.achv-unlock-btn.fill {
+    background-color: aqua;
 }
