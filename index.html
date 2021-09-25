@@ -4,19 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <title>CPC Timer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1 id="h1-msg">試合準備</h1>
     <main>
-        <div class="timer">
-            <p id="timer-time"></p>
+        <h1 class="text-center" id="h1-msg"></h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm number-display-widget">
+                    <h2>残り時間</h2>
+                    <p id="timer-time"></p>
+                </div>
+                <div class="col-sm number-display-widget">
+                    <h2>得点</h2>
+                    <p id="point">0</p>
+                </div>
+            </div>
         </div>
-        <div>
-            <button id="start-button">開始</button>
-            <button id="stop-button">一時停止</button>
-            <button id="reset-button">リセット</button>
+        <div class="timer-btns">
+            <button id="start-button">START</button>
+            <button id="stop-button">STOP</button>
+            <button id="reset-button">RESET</button>
         </div>
     </main>
     <script src="cpc_timer.js"></script>

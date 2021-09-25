@@ -66,6 +66,8 @@ window.addEventListener("load", () => {
 
     timeArea.innerText = ms2string(MATCH_TIME);
 
+    bigMsg.innerText = "試合開始前";
+
     const timer = new Timer(
         MATCH_TIME,
         (rt) => {
@@ -94,5 +96,6 @@ window.addEventListener("load", () => {
     resetButton.onclick = () => {
         timer.reset();
         timeArea.innerText = ms2string(timer.getRemainingTime());
+        bigMsg.innerText = "試合開始前";
     };
 });

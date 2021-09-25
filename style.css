@@ -1,0 +1,58 @@
+main {
+    border: 4px solid black;
+    border-radius: 50px;
+    margin: 50px auto;
+    padding: 40px;
+    width: 70%;
+}
+
+#h1-msg {
+    font-size: 3rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/*
+number-display-widget
+*/
+
+.number-display-widget {
+    margin: 60px auto;
+}
+
+.number-display-widget p {
+    text-align: center;
+    font-size: 5rem;
+}
+.number-display-widget h2 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+/*
+timer buttons
+*/
+.timer-btns {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.timer-btns button {
+    color: white;
+    border: 0;
+    outline: none;
+    border-radius: 50px;
+    padding: 20px 0;
+    width: 160px;
+}
+
+.timer-btns button:enabled {
+    background: green;
+}
+
+.timer-btns button:disabled {
+    background: lightgreen;
+}
