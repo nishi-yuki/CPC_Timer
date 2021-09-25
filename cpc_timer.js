@@ -131,6 +131,8 @@ window.addEventListener("load", () => {
 
         a.addEventListener("click", function () {
             const point = this.querySelector(".point");
+            const time = this.querySelector(".time");
+            time.innerText = ms2string(timer.getRemainingTime());
             let p = parseInt(point.innerText, 10) + 10;
             console.log("p = " + p);
             this.classList.add("fill");
