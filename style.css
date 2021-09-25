@@ -77,3 +77,22 @@ achivements
 .achv-unlock-btn.fill {
     background-color: aqua;
 }
+
+/*
+v-goal-btn
+*/
+
+#v-goal-btn {
+    border-radius: 50px;
+    border: 4px solid gold;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    width: 40%;
+    padding: 20px 0;
+    margin: 30px auto 0 auto;
+}
+
+#v-goal-btn.goal {
+    background-color: gold;
+}

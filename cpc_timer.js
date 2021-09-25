@@ -55,14 +55,6 @@ function ms2string(ms) {
     return Math.abs(ms / 1000).toFixed(1).padStart(5, "0");
 }
 
-function updatePoint() {
-    const pointEles = document.querySelectorAll(".point");
-    let point = 0;
-    pointEles.forEach(pointEle => {
-        point += parseInt(pointEle.innerText, 10)
-    })
-    document.getElementById("point").innerText = point;
-}
 
 window.addEventListener("load", () => {
     const MATCH_TIME = 3 * 60 * 1000;
@@ -108,6 +100,21 @@ window.addEventListener("load", () => {
         bigMsg.innerText = "試合開始前";
     };
 
+    let vGoal = false;
+
+    function updatePoint() {
+        const pointEles = document.querySelectorAll(".point");
+        let point = 0;
+        pointEles.forEach(pointEle => {
+            point += parseInt(pointEle.innerText, 10)
+        })
+        if (vGoal) {
+            point += Math.round(timer.getRemainingTime() / 1000);
+        }
+        console.log("now point is ", point, (timer.getRemainingTime() / 1000).toFixed(0));
+        document.getElementById("point").innerText = point;
+    }
+
     achivementIds = [
         "achv-bombA",
         "achv-center",
@@ -143,4 +150,12 @@ window.addEventListener("load", () => {
             e.preventDefault();
         }, false);
     });
+
+    const vGoalBtn = document.getElementById("v-goal-btn");
+    vGoalBtn.addEventListener("click", function () {
+        this.classList.add("goal");
+        timer.stop();
+        vGoal = true;
+        updatePoint();
+    })
 });
