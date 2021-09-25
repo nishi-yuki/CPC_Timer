@@ -98,6 +98,8 @@ window.addEventListener("load", () => {
         timer.reset();
         timeArea.innerText = ms2string(timer.getRemainingTime());
         bigMsg.innerText = "試合開始前";
+        startButton.disabled = false;
+        stopButton.disabled = true;
     };
 
     let vGoal = false;
