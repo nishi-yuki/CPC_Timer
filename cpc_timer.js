@@ -56,7 +56,7 @@ function ms2string(ms) {
 }
 
 window.addEventListener("load", () => {
-    const MATCH_TIME =5 * 1000;
+    const MATCH_TIME = 3 * 60 * 1000;
     const bigMsg = document.getElementById("h1-msg");
     const timeArea = document.getElementById("timer-time");
 
