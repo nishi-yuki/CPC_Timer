@@ -76,13 +76,20 @@ window.addEventListener("load", () => {
         }
     );
 
+    startButton.disabled = false;
+    stopButton.disabled = true;
+
     startButton.onclick = () => {
         timer.start();
         bigMsg.innerText = "試合中";
+        startButton.disabled = true;
+        stopButton.disabled = false;
     };
     stopButton.onclick = () => {
         timer.stop();
         timeArea.innerText = ms2string(timer.getRemainingTime());
+        startButton.disabled = false;
+        stopButton.disabled = true;
     };
     resetButton.onclick = () => {
         timer.reset();
