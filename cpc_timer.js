@@ -7,7 +7,7 @@ class Timer {
      */
     constructor(remainingTime, countCallBack, endCallback) {
         this.originalRemainingTime = remainingTime;
-        this.remainingTime = remainingTime;
+        this.lastRemainingTime = remainingTime;
         this.countCallBack = countCallBack;
         this.endCallback = endCallback;
         this.startTime = 0;
@@ -18,7 +18,9 @@ class Timer {
             this.startTime = new Date().getTime();
             this.counterID = window.setInterval(() => {
                 this.countCallBack(this.getRemainingTime());
-                if (this.remainingTime <= 0) {
+                if (this.getRemainingTime() <= 0) {
+                    this.stop();
+                    this.lastRemainingTime = 0;
                     this.endCallback();
                 }
             }, 100);
@@ -31,26 +33,26 @@ class Timer {
     }
     stop() {
         if (this.counting) {
-            this.remainingTime -= this._getElapsedTime();
+            this.lastRemainingTime -= this._getElapsedTime();
             window.clearInterval(this.counterID);
             this.counting = false;
         }
     }
     getRemainingTime() {
         if (this.counting) {
-            return this.remainingTime - this._getElapsedTime();
+            return this.lastRemainingTime - this._getElapsedTime();
         } else {
-            return this.remainingTime;
+            return this.lastRemainingTime;
         }
     }
     reset() {
         this.stop();
-        this.remainingTime = this.originalRemainingTime;
+        this.lastRemainingTime = this.originalRemainingTime;
     }
 }
 
 function ms2string(ms) {
-    return (ms / 1000).toFixed(1);
+    return Math.abs(ms / 1000).toFixed(1).padStart(5, "0");
 }
 
 window.addEventListener("load", () => {
@@ -76,6 +78,7 @@ window.addEventListener("load", () => {
 
     startButton.onclick = () => {
         timer.start();
+        bigMsg.innerText = "試合中";
     };
     stopButton.onclick = () => {
         timer.stop();
