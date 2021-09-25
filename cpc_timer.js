@@ -1,0 +1,88 @@
+class Timer {
+    /**
+     * タイマー
+     * @param {number} remainingTime
+     * @param {*} countCallBack 0.1秒ごと呼び出される
+     * @param {*} endCallback 終了時に呼び出される
+     */
+    constructor(remainingTime, countCallBack, endCallback) {
+        this.originalRemainingTime = remainingTime;
+        this.remainingTime = remainingTime;
+        this.countCallBack = countCallBack;
+        this.endCallback = endCallback;
+        this.startTime = 0;
+        this.counting = false;
+    }
+    start() {
+        if (!this.counting) {
+            this.startTime = new Date().getTime();
+            this.counterID = window.setInterval(() => {
+                this.countCallBack(this.getRemainingTime());
+                if (this.remainingTime <= 0) {
+                    this.endCallback();
+                }
+            }, 100);
+            this.counting = true;
+        }
+    }
+    _getElapsedTime() {
+        let now = new Date().getTime();
+        return now - this.startTime;
+    }
+    stop() {
+        if (this.counting) {
+            this.remainingTime -= this._getElapsedTime();
+            window.clearInterval(this.counterID);
+            this.counting = false;
+        }
+    }
+    getRemainingTime() {
+        if (this.counting) {
+            return this.remainingTime - this._getElapsedTime();
+        } else {
+            return this.remainingTime;
+        }
+    }
+    reset() {
+        this.stop();
+        this.remainingTime = this.originalRemainingTime;
+    }
+}
+
+function ms2string(ms) {
+    return (ms / 1000).toFixed(1);
+}
+
+window.addEventListener("load", () => {
+    const MATCH_TIME = 3 * 60 * 1000;
+    const bigMsg = document.getElementById("h1-msg");
+    const timeArea = document.getElementById("timer-time");
+
+    const startButton = document.getElementById("start-button");
+    const stopButton = document.getElementById("stop-button");
+    const resetButton = document.getElementById("reset-button");
+
+    timeArea.innerText = ms2string(MATCH_TIME);
+
+    const timer = new Timer(
+        MATCH_TIME,
+        (rt) => {
+            timeArea.innerText = ms2string(rt);
+        },
+        () => {
+            bigMsg.innerText = "試合終了";
+        }
+    );
+
+    startButton.onclick = () => {
+        timer.start();
+    };
+    stopButton.onclick = () => {
+        timer.stop();
+        timeArea.innerText = ms2string(timer.getRemainingTime());
+    };
+    resetButton.onclick = () => {
+        timer.reset();
+        timeArea.innerText = ms2string(timer.getRemainingTime());
+    };
+});
